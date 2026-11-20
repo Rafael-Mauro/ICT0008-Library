@@ -1,9 +1,34 @@
 #include <iostream>
 #include <string>
 #include "Book.h"
+#include <stdexcept>
 
 int main()
 {
+    // Temporary validation test: an impossible date must be rejected.
+    std::cout << "Validation test: invalid date\n";
+
+    try
+    {
+        Book invalidBook;
+
+        invalidBook.setBookDetails(
+            "The Lightning Thief",
+            "Rick Riordan",
+            "9780786838653",
+            true,
+            "2026-02-30"
+        );
+
+        std::cout << "TEST FAILED: Invalid data was accepted.\n";
+    }
+    catch (const std::invalid_argument& error)
+    {
+        std::cout << "TEST PASSED: " << error.what() << "\n";
+    }
+
+    std::cout << "\n";
+
     const int bookCount = 5;
     Book books[bookCount];
 
@@ -48,9 +73,11 @@ int main()
         "2026-11-19"
     );
 
+    // Sort the books before displaying the catalogue.
+    Book::sortBookData(books, bookCount);
 
     std::cout << "Library Management System\n";
-    std::cout << "Books in the library:\n";
+    std::cout << "Books in the library (sorted by ISBN):\n";
 
     // Display all five books.
     for (int i = 0; i < bookCount; ++i)

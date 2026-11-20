@@ -28,5 +28,7 @@ public:
 
     std::string getISBN() const;
 
+    static void sortBookData(Book books[], int count);
+
 };
 
