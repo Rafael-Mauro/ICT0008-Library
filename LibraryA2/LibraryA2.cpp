@@ -17,36 +17,37 @@ int main()
     );
 
     books[1].setBookDetails(
-        "1984",
-        "George Orwell",
-        "9780451524935",
+        "Twilight",
+        "Stephenie Meyer",
+        "9780316160179",
         false,
         "2026-11-19"
     );
 
     books[2].setBookDetails(
-        "Pride and Prejudice",
-        "Jane Austen",
-        "9780141439518",
+        "The Lightning Thief",
+        "Rick Riordan",
+        "9780786838653",
         true,
         "2026-11-19"
     );
 
     books[3].setBookDetails(
-        "Clean Code",
-        "Robert C. Martin",
-        "9780132350884",
+        "Harry Potter and the Philosopher's Stone",
+        "J. K. Rowling",
+        "9781408855652",
         true,
         "2026-11-19"
     );
 
     books[4].setBookDetails(
-        "The Pragmatic Programmer",
-        "David Thomas and Andrew Hunt",
-        "9780135957059",
+        "The Hunger Games",
+        "Suzanne Collins",
+        "9780439023481",
         true,
         "2026-11-19"
     );
+
 
     std::cout << "Library Management System\n";
     std::cout << "Books in the library:\n";
