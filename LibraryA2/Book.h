@@ -25,5 +25,8 @@ public:
     bool borrowBook();
 
     void returnBook();
+
+    std::string getISBN() const;
+
 };
 

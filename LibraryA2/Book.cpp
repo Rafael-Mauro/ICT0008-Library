@@ -54,3 +54,9 @@ void Book::returnBook()
 {
     availability = true;
 }
+
+// Return the ISBN without changing the book.
+std::string Book::getISBN() const
+{
+    return isbn;
+}
