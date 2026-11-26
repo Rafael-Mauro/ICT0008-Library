@@ -21,9 +21,21 @@
     <ClCompile Include="Book.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="HardcopyBook.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EBook.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Book.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HardcopyBook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

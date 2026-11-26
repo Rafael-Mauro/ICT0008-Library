@@ -12,6 +12,7 @@ private:
     std::string dateAdd;
 
 public:
+    virtual ~Book() = default;
     void setBookDetails(
         const std::string& bookTitle,
         const std::string& bookAuthor,
@@ -20,9 +21,9 @@ public:
         const std::string& bookDateAdd
     );
 
-    void displayBookDetails() const;
+    virtual void displayBookDetails() const;
 
-    bool borrowBook();
+    virtual bool borrowBook();
 
     void returnBook();
 
