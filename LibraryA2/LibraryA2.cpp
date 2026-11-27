@@ -1,66 +1,89 @@
 #include <iostream>
 #include <string>
 #include "Book.h"
+#include "HardcopyBook.h"
+#include "EBook.h"
 
 int main()
 {
     const int bookCount = 5;
-    Book books[bookCount];
 
-    // Initialize five books for the library.
-    books[0].setBookDetails(
+    // Three physical books with shelf locations.
+    HardcopyBook hobbit;
+    hobbit.setBookDetails(
         "The Hobbit",
         "J. R. R. Tolkien",
         "9780261103344",
         true,
         "2026-11-19"
     );
+    hobbit.setShelfNumber("A2-03");
 
-    books[1].setBookDetails(
+    HardcopyBook twilight;
+    twilight.setBookDetails(
         "Twilight",
         "Stephenie Meyer",
         "9780316160179",
         false,
         "2026-11-19"
     );
+    twilight.setShelfNumber("B1-02");
 
-    books[2].setBookDetails(
-        "The Lightning Thief",
-        "Rick Riordan",
-        "9780786838653",
-        true,
-        "2026-11-19"
-    );
-
-    books[3].setBookDetails(
+    HardcopyBook harryPotter;
+    harryPotter.setBookDetails(
         "Harry Potter and the Philosopher's Stone",
         "J. K. Rowling",
         "9781408855652",
         true,
         "2026-11-19"
     );
+    harryPotter.setShelfNumber("A3-01");
 
-    books[4].setBookDetails(
+    // Two ebooks with demonstration license dates.
+    // This license is already expired.
+    EBook lightningThief;
+    lightningThief.setBookDetails(
+        "The Lightning Thief",
+        "Rick Riordan",
+        "9780786838653",
+        true,
+        "2026-11-19"
+    );
+    lightningThief.setEndOfLicenseDate("2026-11-20");
+
+    // A future license permits borrowing while the book is available.
+    EBook hungerGames;
+    hungerGames.setBookDetails(
         "The Hunger Games",
         "Suzanne Collins",
         "9780439023481",
         true,
         "2026-11-19"
     );
+    hungerGames.setEndOfLicenseDate("2099-12-31");
 
-    // Sort the books before displaying the catalogue.
+    // The objects above remain alive throughout main().
+    // Non-owning pointers keep the complete derived objects intact.
+    Book* books[bookCount] = {
+        &hobbit,
+        &twilight,
+        &lightningThief,
+        &harryPotter,
+        &hungerGames
+    };
+
+    // Select the pointer overload of Insertion Sort.
     Book::sortBookData(books, bookCount);
 
-    std::cout << "Library Management System\n";
+    std::cout << "Library Management System - Phase 2\n";
     std::cout << "Books in the library (sorted by ISBN):\n";
 
-    // Display all five books.
     for (int i = 0; i < bookCount; ++i)
     {
-        books[i].displayBookDetails();
+        // Virtual dispatch also displays the shelf or license information.
+        books[i]->displayBookDetails();
     }
 
-    // Keep accepting requests until the user enters 0.
     while (true)
     {
         std::string requestedISBN;
@@ -82,24 +105,25 @@ int main()
 
         bool found = false;
 
-        // Search the array for a matching ISBN.
         for (int i = 0; i < bookCount; ++i)
         {
-            if (books[i].getISBN() == requestedISBN)
+            if (books[i]->getISBN() == requestedISBN)
             {
                 found = true;
 
-                if (books[i].borrowBook())
+                // EBook checks its license before the base availability check.
+                if (books[i]->borrowBook())
                 {
                     std::cout << "Book borrowed successfully.\n";
                 }
                 else
                 {
-                    std::cout
-                        << "Error: This book is already borrowed.\n";
+                    // A false result may mean a loan or a license restriction.
+                    std::cout << "Error: Borrowing denied. The book is already"
+                        << " borrowed or its ebook license is not valid.\n";
                 }
 
-                books[i].displayBookDetails();
+                books[i]->displayBookDetails();
                 break;
             }
         }

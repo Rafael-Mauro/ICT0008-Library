@@ -31,5 +31,7 @@ public:
 
     static void sortBookData(Book books[], int count);
 
+    // Sort a mixed catalogue without copying derived objects.
+    static void sortBookData(Book* books[], int count);
 };
 

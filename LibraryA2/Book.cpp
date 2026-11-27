@@ -192,3 +192,24 @@ void Book::sortBookData(Book books[], int count)
         books[j + 1] = key;
     }
 }
+
+// Sort pointers to complete books, preserving derived-class data.
+void Book::sortBookData(Book* books[], int count)
+{
+    for (int i = 1; i < count; ++i)
+    {
+        Book* key = books[i];
+        int j = i - 1;
+
+        // Move pointers whose books have larger ISBNs.
+        while (j >= 0 &&
+            books[j]->getISBN() > key->getISBN())
+        {
+            books[j + 1] = books[j];
+            --j;
+        }
+
+        // Insert the pointer in its correct position.
+        books[j + 1] = key;
+    }
+}
